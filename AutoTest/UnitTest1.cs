@@ -4,6 +4,7 @@ using TestStack.White.UIItems.WindowItems;
 using TestStack.White;
 using TestStack.White.Factory;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace AutoTest
 {
@@ -93,18 +94,21 @@ namespace AutoTest
         }
 
         [DataTestMethod]
-        //[DataRow("but1", "but2", "butPlus", "3")]
-        //[DataRow("but3", "but4", "butMinus", "-1")]
-        //[DataRow("but5", "but6", "butMult", "30")]
+        [DataRow("but1", "but2", "butPlus", "3")]
+        [DataRow("but3", "but4", "butMinus", "-1")]
+        [DataRow("but5", "but6", "butMult", "30")]
         [DataRow("but9", "but3", "butDiv", "3")]
         public void TestWPFRealJob(string x, string y, string op, string res)
         {
-            obj.GetButton(x).Click();
-            obj.GetButton(op).Click();
-            obj.GetButton(y).Click();
-            obj.GetButton("butEqual").Click();
-            string calc = obj.GetTextBox("txtResult").BulkText;
-            Assert.AreEqual(res, calc);
+            Task.Run(() =>
+            {
+                obj.GetButton(x).Click();
+                obj.GetButton(op).Click();
+                obj.GetButton(y).Click();
+                obj.GetButton("butEqual").Click();
+                string calc = obj.GetTextBox("txtResult").BulkText;
+                return calc;
+            }).ContinueWith((e) => { Assert.AreEqual(res, e); });
         }
     }
 }
