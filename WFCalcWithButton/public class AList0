@@ -1,0 +1,315 @@
+ public class AList0
+    {
+        int[] arr = { };
+
+        public void Init(int[] ini)
+        {
+            if (ini == null)
+                throw new ArgumentNullException();
+
+            arr = new int[ini.Length];
+            for (int i = 0; i < ini.Length; i++)
+            {
+                arr[i] = ini[i];
+            }
+        }
+
+        public int Size()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+
+            return arr.Length;
+        }
+
+        public void Clear()
+        {
+            arr = new int[0];
+        }
+
+        public override String ToString()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+
+            string ret = "";
+            for (int i = 0; i < arr.Length; i++)
+            {
+                ret += arr[i] + ((i != arr.Length - 1) ? ", " : "");
+            }
+            return ret;
+        }
+
+        public int[] ToArray()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+
+            int[] rArr = new int[arr.Length];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                rArr[i] = arr[i];
+            }
+            return rArr;
+        }
+
+        public void AddStart(int val)
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+
+            int[] nArr = new int[arr.Length + 1];
+            nArr[0] = val;
+            for (int i = 1; i < nArr.Length; i++)
+            {
+                nArr[i] = arr[i - 1];
+            }
+            arr = nArr;
+        }
+
+        public void AddEnd(int val)
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+
+            int[] nArr = new int[arr.Length + 1];
+            nArr[arr.Length] = val;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                nArr[i] = arr[i];
+            }
+            arr = nArr;
+        }
+
+        public void AddPos(int pos, int val)
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+            if (pos < 0 || pos > arr.Length)
+                throw new IndexOutOfRangeException();
+
+            int[] nArr = new int[arr.Length + 1];
+            nArr[pos] = val;
+            int j = 0;
+            for (int i = 0; i < arr.Length; i++, j++)
+            {
+                if (i > pos)
+                {
+                    nArr[i] = arr[j];
+                }
+                else if (i < pos)
+                {
+                    nArr[i] = arr[i];
+                }
+                else
+                {
+                    j = i - 1;
+                }
+            }
+            if (nArr.Length - 1 != pos)
+            {
+                nArr[nArr.Length - 1] = arr[arr.Length - 1];
+            }
+            arr = nArr;
+        }
+
+        public void DelStart()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+            if (arr.Length == 0)
+                throw new EmptyArrayEx();
+
+            int[] nArr = new int[arr.Length - 1];
+            for (int i = 1; i < arr.Length; i++)
+            {
+                nArr[i - 1] = arr[i];
+            }
+            arr = nArr;
+        }
+        public void DelEnd()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+            if (arr.Length == 0)
+                throw new EmptyArrayEx();
+
+            int[] nArr = new int[arr.Length - 1];
+            for (int i = 0; i < nArr.Length; i++)
+            {
+                nArr[i] = arr[i];
+            }
+            arr = nArr;
+        }
+        public void DelPos(int pos)
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+            if (pos < 0 || pos > arr.Length - 1)
+                throw new IndexOutOfRangeException();
+
+            int[] nArr = new int[arr.Length - 1];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (i < pos)
+                {
+                    nArr[i] = arr[i];
+                }
+                else if (i > pos)
+                {
+                    nArr[i - 1] = arr[i];
+                }
+            }
+            arr = nArr;
+        }
+
+        public int Min()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+            if (arr.Length == 0)
+                throw new EmptyArrayEx();
+
+            int min = arr[0];
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (arr[i] < min)
+                    min = arr[i];
+            }
+            return min;
+        }
+        public int Max()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+            if (arr.Length == 0)
+                throw new EmptyArrayEx();
+
+            int max = arr[0];
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (arr[i] > max)
+                    max = arr[i];
+            }
+            return max;
+        }
+        public int MinPos()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+            if (arr.Length == 0)
+                throw new EmptyArrayEx();
+
+            int res = 0;
+
+            int min = arr[0];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] < min)
+                {
+                    min = arr[i];
+                    res = i;
+                }
+            }
+
+            return res;
+        }
+        public int MaxPos()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+            if (arr.Length == 0)
+                throw new EmptyArrayEx();
+
+            int res = 0;
+
+            int max = arr[0];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] > max)
+                {
+                    max = arr[i];
+                    res = i;
+                }
+            }
+
+            return res;
+
+        }
+
+        public void Set(int pos, int val)
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+            if (pos < 0 || pos > arr.Length - 1)
+                throw new IndexOutOfRangeException();
+
+            arr[pos] = val;
+        }
+        public int Get(int pos)
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+            if (pos < 0 || pos > arr.Length - 1)
+                throw new IndexOutOfRangeException();
+
+            return arr[pos];
+        }
+
+        public void Sort()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+
+            int step = arr.Length / 2;
+            while (step > 0)
+            {
+                int j;
+                for (int i = step; i < arr.Length; i++)
+                {
+                    int value = arr[i];
+                    for (j = i - step; (j >= 0) && (arr[j] > value); j -= step)
+                    {
+                        arr[j + step] = arr[j];
+
+                    }
+                    arr[j + step] = value;
+                }
+                step /= 2;
+            }
+        }
+        public void Reverse()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+
+            for (int i = 0; i < arr.Length / 2; i++)
+            {
+                int temp = arr[i];
+                arr[i] = arr[arr.Length - 1 - i];
+                arr[arr.Length - 1 - i] = temp;
+            }
+        }
+        public void HalfReverse()
+        {
+            if (arr == null)
+                throw new NullArrayEx();
+
+            int len = arr.Length;
+            if (len > 1)
+            {
+                for (int j = 0; j < len / 2; j++)
+                {
+                    int temp = arr[0];
+                    for (int i = 0; i < len - 1; i++)
+                    {
+                        arr[i] = arr[i + 1];
+                    }
+                    arr[len - 1] = temp;
+                }
+            }
+        }
+    }
+
+    IList lst = new Arro;
+    
