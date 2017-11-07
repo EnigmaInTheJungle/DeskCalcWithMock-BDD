@@ -15,7 +15,6 @@ namespace AutoTest
     {
         Window window = null;
         ObjectModel obj;
-        Application application = null;
 
         //static string GetApplicationPath(string applicationName)
         //{
@@ -28,7 +27,7 @@ namespace AutoTest
         [TestInitialize]
         public void StartApp()
         {
-            application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
+            Application application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
             {
                 WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
             });
@@ -42,7 +41,6 @@ namespace AutoTest
         public void QuitF()
         {
             window.Close();
-            application.Kill();
         }
 
         [DataTestMethod]
