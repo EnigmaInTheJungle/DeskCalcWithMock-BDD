@@ -27,14 +27,11 @@ namespace AutoTest
         [TestInitialize]
         public void StartApp()
         {
-            Application application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
-            {
-                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
-            });
+            
             //Application application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
             //window = application.GetWindow("Form1", InitializeOption.NoCache);
-            window = application.GetWindows()[0];
-            obj = new ObjectModel(window);
+            
+            //obj = new ObjectModel(window);
         }
 
         [TestCleanup]
@@ -61,6 +58,12 @@ namespace AutoTest
         [DataRow("butEqual")]
         public void TestWPFExistingElement(string elId)
         {
+            Application application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
+            {
+                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
+            });
+            window = application.GetWindows()[0];
+            obj = new ObjectModel(window);
             Assert.AreEqual(true, obj.GetButton(elId).Visible);
         }
 
@@ -77,6 +80,12 @@ namespace AutoTest
         [DataRow("but0", "0")]
         public void TestWPFSimpleCheck(string elId, string res)
         {
+            Application application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
+            {
+                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
+            });
+            window = application.GetWindows()[0];
+            obj = new ObjectModel(window);
             obj.GetButton(elId).Click();
             string calc = obj.GetTextBox("txtResult").BulkText;
             Assert.AreEqual(res, calc);
@@ -89,6 +98,12 @@ namespace AutoTest
         [DataRow(new string[] { "but3", "but0", "but6" }, "306")]
         public void TestWPFComplexCheck(string[] arr, string res)
         {
+            Application application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
+            {
+                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
+            });
+            window = application.GetWindows()[0];
+            obj = new ObjectModel(window);
             foreach (string str in arr)
             {
                 obj.GetButton(str).Click();
@@ -104,6 +119,12 @@ namespace AutoTest
         [DataRow("but9", "but3", "butDiv", "3")]
         public void TestWPFRealJob(string x, string y, string op, string res)
         {
+            Application application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
+            {
+                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
+            });
+            window = application.GetWindows()[0];
+            obj = new ObjectModel(window);
             Task.Run(() =>
             {
                 obj.GetButton(x).Click();
