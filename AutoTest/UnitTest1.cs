@@ -5,6 +5,7 @@ using TestStack.White;
 using TestStack.White.Factory;
 using System.IO;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace AutoTest
 {
@@ -14,22 +15,26 @@ namespace AutoTest
     {
         Window window = null;
         ObjectModel obj;
+        Application application = null;
 
-
-        static string GetApplicationPath(string applicationName)
-        {
-            var tmpDirName = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
-            var solutionFolder = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(tmpDirName)))+ @"\WFCalcWithButton\";
-            string result = Path.Combine(solutionFolder, applicationName);
-            return result;
-        }
+        //static string GetApplicationPath(string applicationName)
+        //{
+        //    var tmpDirName = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
+        //    var solutionFolder = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(tmpDirName))) + @"\WFCalcWithButton\";
+        //    string result = Path.Combine(solutionFolder, applicationName);
+        //    return result;
+        //}
 
         [TestInitialize]
         public void StartApp()
         {
-            //string appPath = @"D:\С#1708\WFCalc-master\CalcWinForm\bin\Debug\CalcWinForm.exe";
-            Application application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
-            window = application.GetWindow("Form1", InitializeOption.NoCache);
+            application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
+            {
+                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
+            });
+            //Application application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
+            //window = application.GetWindow("Form1", InitializeOption.NoCache);
+            window = application.GetWindows()[0];
             obj = new ObjectModel(window);
         }
 
@@ -37,6 +42,7 @@ namespace AutoTest
         public void QuitF()
         {
             window.Close();
+            application.Kill();
         }
 
         [DataTestMethod]
