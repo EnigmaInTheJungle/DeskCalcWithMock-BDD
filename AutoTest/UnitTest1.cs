@@ -24,21 +24,21 @@ namespace AutoTest
         //    return result;
         //}
 
-        [TestInitialize]
-        public void StartApp()
-        {
+        //[TestInitialize]
+        //public void StartApp()
+        //{
             
-            //Application application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
-            //window = application.GetWindow("Form1", InitializeOption.NoCache);
+        //    //Application application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
+        //    //window = application.GetWindow("Form1", InitializeOption.NoCache);
             
-            //obj = new ObjectModel(window);
-        }
+        //    //obj = new ObjectModel(window);
+        //}
 
-        [TestCleanup]
-        public void QuitF()
-        {
-            window.Close();
-        }
+        //[TestCleanup]
+        //public void QuitF()
+        //{
+        //    window.Close();
+        //}
 
         [DataTestMethod]
         [DataRow("but1")]
@@ -65,6 +65,7 @@ namespace AutoTest
             window = application.GetWindows()[0];
             obj = new ObjectModel(window);
             Assert.AreEqual(true, obj.GetButton(elId).Visible);
+            application.Kill();
         }
 
         [DataTestMethod]
@@ -89,6 +90,7 @@ namespace AutoTest
             obj.GetButton(elId).Click();
             string calc = obj.GetTextBox("txtResult").BulkText;
             Assert.AreEqual(res, calc);
+            application.Kill();
         }
 
         [DataTestMethod]
@@ -110,6 +112,7 @@ namespace AutoTest
             }
             string calc = obj.GetTextBox("txtResult").BulkText;
             Assert.AreEqual(res, calc);
+            application.Kill();
         }
 
         [DataTestMethod]
@@ -134,6 +137,7 @@ namespace AutoTest
                 string calc = obj.GetTextBox("txtResult").BulkText;
                 return calc;
             }).ContinueWith((e) => { Assert.AreEqual(res, e); });
+            application.Kill();
         }
     }
 }
