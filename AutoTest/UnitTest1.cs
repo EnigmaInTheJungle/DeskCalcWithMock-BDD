@@ -33,7 +33,7 @@ namespace AutoTest
             //});
 
             Application application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
-            window = application.GetWindow("Form1", InitializeOption.NoCache);
+            window = application.GetWindow()[0];
 
             obj = new ObjectModel(window);
 
