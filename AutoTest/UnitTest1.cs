@@ -31,7 +31,7 @@ namespace AutoTest
 
             application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
             {
-                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
+                WorkingDirectory = @"..\..\..\..\..\WFCalcWithButton\bin\Debug\",
             });
 
             //Application application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
