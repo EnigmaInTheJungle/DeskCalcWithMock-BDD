@@ -13,6 +13,7 @@ namespace AutoTest
 
     public class WFWithB
     {
+        static Application application;
         Window window = null;
         ObjectModel obj;
 
@@ -24,21 +25,28 @@ namespace AutoTest
         //    return result;
         //}
 
-        //[TestInitialize]
-        //public void StartApp()
-        //{
-            
-        //    //Application application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
-        //    //window = application.GetWindow("Form1", InitializeOption.NoCache);
-            
-        //    //obj = new ObjectModel(window);
-        //}
+        [TestInitialize]
+        public void StartApp()
+        {
 
-        //[TestCleanup]
-        //public void QuitF()
-        //{
-        //    window.Close();
-        //}
+            application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
+            {
+                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
+            });
+
+            //Application application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
+            window = application.GetWindow("Form1", InitializeOption.NoCache);
+
+            obj = new ObjectModel(window);
+
+        }
+
+        [TestCleanup]
+        public void QuitF()
+        {
+            window.Close();
+            application.Close();
+        }
 
         [DataTestMethod]
         [DataRow("but1")]
@@ -58,14 +66,8 @@ namespace AutoTest
         [DataRow("butEqual")]
         public void TestWPFExistingElement(string elId)
         {
-            Application application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
-            {
-                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
-            });
-            window = application.GetWindows()[0];
             obj = new ObjectModel(window);
             Assert.AreEqual(true, obj.GetButton(elId).Visible);
-            application.Kill();
         }
 
         [DataTestMethod]
@@ -81,16 +83,9 @@ namespace AutoTest
         [DataRow("but0", "0")]
         public void TestWPFSimpleCheck(string elId, string res)
         {
-            Application application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
-            {
-                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
-            });
-            window = application.GetWindows()[0];
-            obj = new ObjectModel(window);
             obj.GetButton(elId).Click();
             string calc = obj.GetTextBox("txtResult").BulkText;
             Assert.AreEqual(res, calc);
-            application.Kill();
         }
 
         [DataTestMethod]
@@ -100,19 +95,12 @@ namespace AutoTest
         [DataRow(new string[] { "but3", "but0", "but6" }, "306")]
         public void TestWPFComplexCheck(string[] arr, string res)
         {
-            Application application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
-            {
-                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
-            });
-            window = application.GetWindows()[0];
-            obj = new ObjectModel(window);
             foreach (string str in arr)
             {
                 obj.GetButton(str).Click();
             }
             string calc = obj.GetTextBox("txtResult").BulkText;
             Assert.AreEqual(res, calc);
-            application.Kill();
         }
 
         [DataTestMethod]
@@ -122,12 +110,6 @@ namespace AutoTest
         [DataRow("but9", "but3", "butDiv", "3")]
         public void TestWPFRealJob(string x, string y, string op, string res)
         {
-            Application application = Application.Launch(new ProcessStartInfo(@"WFCalcWithButton.exe")
-            {
-                WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
-            });
-            window = application.GetWindows()[0];
-            obj = new ObjectModel(window);
             Task.Run(() =>
             {
                 obj.GetButton(x).Click();
@@ -137,7 +119,6 @@ namespace AutoTest
                 string calc = obj.GetTextBox("txtResult").BulkText;
                 return calc;
             }).ContinueWith((e) => { Assert.AreEqual(res, e); });
-            application.Kill();
         }
     }
 }
