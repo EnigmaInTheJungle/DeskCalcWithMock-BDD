@@ -33,7 +33,7 @@ namespace AutoTest
             //});
 
             Application application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
-            window = application.GetWindow()[0];
+            window = application.GetWindows()[0];
 
             obj = new ObjectModel(window);
 
@@ -42,7 +42,7 @@ namespace AutoTest
         [TearDown]
         public void QuitF()
         {
-            window.Close();
+            application.Kill();
         }
 
         [Test]
