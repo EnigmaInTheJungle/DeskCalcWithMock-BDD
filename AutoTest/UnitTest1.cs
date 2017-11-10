@@ -12,6 +12,7 @@ namespace AutoTest
     public class WFWithB
     {
         Application application;
+        Window window;
         ObjectModel obj;
 
         static string GetApplicationPath(string applicationName)
@@ -32,7 +33,7 @@ namespace AutoTest
             //});
 
             application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
-            Window window = application.GetWindows()[0];
+            window = application.GetWindows()[0];
 
             obj = new ObjectModel(window);
 
