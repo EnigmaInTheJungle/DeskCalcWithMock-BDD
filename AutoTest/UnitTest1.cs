@@ -11,8 +11,7 @@ namespace AutoTest
 {
     public class WFWithB
     {
-        static Application application;
-        Window window = null;
+        Application application;
         ObjectModel obj;
 
         static string GetApplicationPath(string applicationName)
@@ -32,8 +31,8 @@ namespace AutoTest
             //    WorkingDirectory = @"..\..\..\WFCalcWithButton\bin\Debug\",
             //});
 
-            Application application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
-            window = application.GetWindows()[0];
+            application = Application.Launch(GetApplicationPath("WFCalcWithButton.exe"));
+            Window window = application.GetWindows()[0];
 
             obj = new ObjectModel(window);
 
