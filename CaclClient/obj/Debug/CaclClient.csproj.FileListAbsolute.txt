@@ -1,6 +1,0 @@
-C:\Users\Kurkulya\source\repos\CaclClient\CaclClient\bin\Debug\CaclClient.dll
-C:\Users\Kurkulya\source\repos\CaclClient\CaclClient\bin\Debug\CaclClient.pdb
-C:\Users\Kurkulya\source\repos\CaclClient\CaclClient\obj\Debug\CaclClient.csprojResolveAssemblyReference.cache
-C:\Users\Kurkulya\source\repos\CaclClient\CaclClient\obj\Debug\CaclClient.csproj.CoreCompileInputs.cache
-C:\Users\Kurkulya\source\repos\CaclClient\CaclClient\obj\Debug\CaclClient.dll
-C:\Users\Kurkulya\source\repos\CaclClient\CaclClient\obj\Debug\CaclClient.pdb
