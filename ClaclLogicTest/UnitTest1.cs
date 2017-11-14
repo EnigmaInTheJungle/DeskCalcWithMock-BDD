@@ -17,7 +17,7 @@ namespace ClaclLogicTest
         }
 
         [Test]
-        [TestCase(1, 2, '+', "0")]
+        [TestCase(1, 2, '+', "3")]
         [TestCase(12, 2, '-', "10")]
         [TestCase(7, 2, '*', "14")]
         [TestCase(6, 2, '/', "3")]

@@ -36,3 +36,15 @@ D:\С#1708\WFCalc-master\WFCalcWithButton\obj\Debug\WFCalcWithButton.exe
 D:\С#1708\WFCalc-master\WFCalcWithButton\obj\Debug\WFCalcWithButton.pdb
 D:\С#1708\WFCalc-master\WFCalcWithButton\WFCalcWithButton.exe
 D:\С#1708\WFCalc-master\WFCalcWithButton\WFCalcWithButton.pdb
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\obj\Debug\WFCalcWithButton.Form1.resources
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\obj\Debug\WFCalcWithButton.Properties.Resources.resources
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\obj\Debug\WFCalcWithButton.csproj.GenerateResource.Cache
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\obj\Debug\WFCalcWithButton.csproj.CoreCompileInputs.cache
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\obj\Debug\WFCalcWithButton.csprojResolveAssemblyReference.cache
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\WFCalcWithButton.exe.config
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\obj\Debug\WFCalcWithButton.exe
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\obj\Debug\WFCalcWithButton.pdb
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\WFCalcWithButton.exe
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\WFCalcWithButton.pdb
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\CaclClient.dll
+C:\Users\Kurkulya\Source\Reposk\DeskCalc\WFCalcWithButton\CaclClient.pdb

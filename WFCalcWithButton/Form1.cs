@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CaclClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,15 +14,20 @@ namespace WFCalcWithButton
 {
     public partial class Form1 : Form
     {
-        HttpClient client;
+        public enum ClientType{ REAL, MOCK };
+
+        ICalcClient client;
         int x = 0;
         int y = 0;
         char op = ' ';
 
-        public Form1()
+        public Form1(ClientType clientType)
         {
             InitializeComponent();
-            client = new HttpClient();
+            if (clientType == ClientType.REAL)
+                client = new RealCalcClient("http://localhost:8888");
+            else
+                client = new MockCalcClient();
         }
 
         private void buttonNumber_Click(object sender, EventArgs e)
@@ -30,7 +36,7 @@ namespace WFCalcWithButton
             textResult.Text += but.Text;
         }
 
-        private void buttonOperation_Click(object sender, EventArgs e)
+        private async void buttonOperation_Click(object sender, EventArgs e)
         {
             Button but = (Button)sender;
             char oper = Convert.ToChar(but.Text);
@@ -43,15 +49,8 @@ namespace WFCalcWithButton
             else
             {
                 y = Int32.Parse(textResult.Text);
-                textResult.Text = Task.Run(() => Calculate(x, y, op)).Result;
+                textResult.Text = (await client.Calculate(x, y, op)).ToString();
             }
-        }
-
-        public async Task<string> Calculate(double a, double b, char op)
-        {
-            var param = "a=" + a + "&b=" + b + "&op=" + op;
-            string response = await client.GetStringAsync("http://localhost:8888?" + param);
-            return response;
         }
     }
 }
