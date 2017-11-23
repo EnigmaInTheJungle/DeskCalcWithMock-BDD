@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WFCalcWithButton
 {
-    class MockCalcClient : ICalcClient
+    public class MockCalcClient : ICalcClient
     {
         public async Task<double> Calculate(double a, double b, char op)
         {
